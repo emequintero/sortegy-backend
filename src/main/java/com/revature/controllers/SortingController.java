@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.Animation;
+import com.revature.util.BubbleSortHelper;
 import com.revature.util.QuickSortHelper;
 
 @RestController
@@ -27,6 +28,20 @@ public class SortingController {
 		QuickSortHelper.quickSort(arr, 0, arr.length-1);
 		//get animation list from helper class
 		List<Animation> animations = QuickSortHelper.getQuickSortAnimations();
+		return ResponseEntity.ok().body(
+				"{\"sortedArr\" : " + mapper.writeValueAsString(arr) + "," +
+				"\"animations\" : " + mapper.writeValueAsString(animations) + "}"
+		);
+	}
+	
+	@PostMapping("/bubble")
+	public ResponseEntity<String> bubbleSort(@RequestBody int[]arr) throws JsonProcessingException{
+		//reset array list for animations in helper class
+		BubbleSortHelper.resetAnimations();
+		//sort array
+		BubbleSortHelper.bubbleSort(arr);
+		//get animation list from helper class
+		List<Animation> animations = BubbleSortHelper.getBubbleSortAnimations();
 		return ResponseEntity.ok().body(
 				"{\"sortedArr\" : " + mapper.writeValueAsString(arr) + "," +
 				"\"animations\" : " + mapper.writeValueAsString(animations) + "}"
