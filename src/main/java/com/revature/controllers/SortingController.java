@@ -1,7 +1,6 @@
 package com.revature.controllers;
 
 import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,16 +15,20 @@ import com.revature.util.QuickSortHelper;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/sort")
+@RequestMapping(value="/sort",produces="application/json")
 public class SortingController {
 	ObjectMapper mapper = new ObjectMapper();
 	
 	@PostMapping("/quick")
 	public ResponseEntity<String> quickSort(@RequestBody int[]arr) throws JsonProcessingException{
+		//reset array list for animations in helper class
+		QuickSortHelper.resetAnimations();
+		//sort array
 		QuickSortHelper.quickSort(arr, 0, arr.length-1);
+		//get animation list from helper class
 		List<Animation> animations = QuickSortHelper.getQuickSortAnimations();
 		return ResponseEntity.ok().body(
-				"{\"sortedArr\" : " + mapper.writeValueAsString(arr) +
+				"{\"sortedArr\" : " + mapper.writeValueAsString(arr) + "," +
 				"\"animations\" : " + mapper.writeValueAsString(animations) + "}"
 		);
 	}

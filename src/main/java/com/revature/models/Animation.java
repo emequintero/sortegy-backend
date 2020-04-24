@@ -1,16 +1,14 @@
 package com.revature.models;
 
-import java.util.List;
-
 public class Animation {
 	private String state;
-	private List<Integer> values;
+	private int[] values;
 
 	public Animation() {
 		super();
 	}
 
-	public Animation(String state, List<Integer> values) {
+	public Animation(String state, int[] values) {
 		super();
 		this.state = state;
 		this.values = values;
@@ -24,11 +22,11 @@ public class Animation {
 		this.state = state;
 	}
 
-	public List<Integer> getValues() {
+	public int[] getValues() {
 		return values;
 	}
 
-	public void setValues(List<Integer> values) {
+	public void setValues(int[] values) {
 		this.values = values;
 	}
 
