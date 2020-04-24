@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.Animation;
 import com.revature.util.BubbleSortHelper;
+import com.revature.util.MergeSortHelper;
 import com.revature.util.QuickSortHelper;
 
 @RestController
@@ -42,6 +43,20 @@ public class SortingController {
 		BubbleSortHelper.bubbleSort(arr);
 		//get animation list from helper class
 		List<Animation> animations = BubbleSortHelper.getBubbleSortAnimations();
+		return ResponseEntity.ok().body(
+				"{\"sortedArr\" : " + mapper.writeValueAsString(arr) + "," +
+				"\"animations\" : " + mapper.writeValueAsString(animations) + "}"
+		);
+	}
+	
+	@PostMapping("/merge")
+	public ResponseEntity<String> mergeSort(@RequestBody int[]arr) throws JsonProcessingException{
+		//reset array list for animations in helper class
+		MergeSortHelper.resetAnimations();
+		//sort array
+		MergeSortHelper.mergeSort(arr);
+		//get animation list from helper class
+		List<Animation> animations = MergeSortHelper.getMergeSortAnimations();
 		return ResponseEntity.ok().body(
 				"{\"sortedArr\" : " + mapper.writeValueAsString(arr) + "," +
 				"\"animations\" : " + mapper.writeValueAsString(animations) + "}"
