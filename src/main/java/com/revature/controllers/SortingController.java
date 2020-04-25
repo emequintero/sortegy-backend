@@ -54,7 +54,7 @@ public class SortingController {
 		//reset array list for animations in helper class
 		MergeSortHelper.resetAnimations();
 		//sort array
-		MergeSortHelper.mergeSort(arr);
+		MergeSortHelper.mergeSort(arr, 0, arr.length-1);
 		//get animation list from helper class
 		List<Animation> animations = MergeSortHelper.getMergeSortAnimations();
 		return ResponseEntity.ok().body(
