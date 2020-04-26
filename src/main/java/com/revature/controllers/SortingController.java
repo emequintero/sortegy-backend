@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.Animation;
 import com.revature.util.BubbleSortHelper;
+import com.revature.util.InsertionSortHelper;
 import com.revature.util.MergeSortHelper;
 import com.revature.util.QuickSortHelper;
 
@@ -57,6 +58,34 @@ public class SortingController {
 		MergeSortHelper.mergeSort(arr, 0, arr.length-1);
 		//get animation list from helper class
 		List<Animation> animations = MergeSortHelper.getMergeSortAnimations();
+		return ResponseEntity.ok().body(
+				"{\"sortedArr\" : " + mapper.writeValueAsString(arr) + "," +
+				"\"animations\" : " + mapper.writeValueAsString(animations) + "}"
+		);
+	}
+	
+	@PostMapping("/insertion")
+	public ResponseEntity<String> insertionSort(@RequestBody int[] arr) throws JsonProcessingException{
+		//reset animations list in helper class
+		InsertionSortHelper.resetAnimations();
+		//sort array
+		InsertionSortHelper.insertionSort(arr);
+		//get animation list from helper class
+		List<Animation> animations = InsertionSortHelper.getInsertionSortAnimations();
+		return ResponseEntity.ok().body(
+				"{\"sortedArr\" : " + mapper.writeValueAsString(arr) + "," + 
+				"\"animations\" : " + mapper.writeValueAsString(animations) + "}"
+		);
+	}
+	
+	@PostMapping("/heap")
+	public ResponseEntity<String> heapSort(@RequestBody int[] arr) throws JsonProcessingException{
+		//reset animations in helper class
+		HeapSortHelper.resetAnimations();
+		//sort array
+		HeapSortHelper.heapSort(arr);
+		//get animation list from helper class
+		List<Animation> animations = HeapSortHelper.getHeapSortAnimations();
 		return ResponseEntity.ok().body(
 				"{\"sortedArr\" : " + mapper.writeValueAsString(arr) + "," +
 				"\"animations\" : " + mapper.writeValueAsString(animations) + "}"
