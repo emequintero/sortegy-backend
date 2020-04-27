@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.Animation;
 import com.revature.util.BubbleSortHelper;
+import com.revature.util.HeapSortHelper;
 import com.revature.util.InsertionSortHelper;
 import com.revature.util.MergeSortHelper;
 import com.revature.util.QuickSortHelper;
